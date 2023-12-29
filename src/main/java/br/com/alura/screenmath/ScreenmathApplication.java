@@ -1,5 +1,6 @@
 package br.com.alura.screenmath;
 
+import br.com.alura.screenmath.model.DadosEpesodio;
 import br.com.alura.screenmath.model.DadosSerie;
 import br.com.alura.screenmath.service.ConsumoApi;
 import br.com.alura.screenmath.service.ConverteDados;
@@ -17,10 +18,15 @@ public class ScreenmathApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		var consumoApi = new ConsumoApi();
-		var json = consumoApi.obterDados("https://www.omdbapi.com/?t=gilmore+girls&apikey=6585022c");
+		//var json = consumoApi.obterDados("https://www.omdbapi.com/?t=gilmore+girls&apikey=6585022c");
 		//System.out.printf(json);
 		ConverteDados conversor = new ConverteDados();
-		DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
-		System.out.printf(String.valueOf(dados));
+		//DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
+		//System.out.printf(String.valueOf(dados));
+
+		var json = consumoApi.obterDados("https://www.omdbapi.com/?t=gilmore+girls&season=1&episode=2&apikey=6585022c");
+		DadosEpesodio dadosEpesodio = conversor.obterDados(json, DadosEpesodio.class);
+
+		System.out.printf(String.valueOf(dadosEpesodio));
 	}
 }
